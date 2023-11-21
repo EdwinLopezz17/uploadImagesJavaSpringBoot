@@ -25,8 +25,8 @@ public class MediaController {
     private final HttpServletRequest request;
 
     @PostMapping("upload")
-    public List<Map<String, String>> uploadFiles(@RequestParam("files") List<MultipartFile> files) {
-        List<Map<String, String>> fileUrls = new ArrayList<>();
+    public List<String> uploadFiles(@RequestParam("files") List<MultipartFile> files) {
+        List<String> fileUrls = new ArrayList<>();
 
         int filesToProcess = Math.min(files.size(), 3);
 
@@ -40,7 +40,7 @@ public class MediaController {
                     .path(path)
                     .toUriString();
 
-            fileUrls.add(Map.of("url", url));
+            fileUrls.add(url);
         }
         return fileUrls;
     }
